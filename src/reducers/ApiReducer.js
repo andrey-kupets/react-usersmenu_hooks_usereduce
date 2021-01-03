@@ -1,12 +1,6 @@
-export const initialStateUsers = null;
-
-export const apiReducer = (state = initialStateUsers, action) => {
+export const apiReducer = (state, action) => {
     switch (action.type) {
-        case 'SET_USERS': {
-            return action.payload;
-        }
-        default: {
-            return this.state;
-        }
+        case 'SET_USERS': return action.payload;
+        default: return this.state;
     }
-}
+};

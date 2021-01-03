@@ -1,18 +1,17 @@
 import { useReducer } from 'react';
-import {editedUsersReducer} from "../../reducers/EditedUsersReducer";
-
+import { userReducer } from "../../reducers/UserReducer";
 
 export default function EditUserWindow(props) {
-    const {fullUserInfo, saveEditUser} = props;
+    const {fullUserInfo, saveEditedUser} = props;
     const {name, username, email, phone, website} = fullUserInfo;
 
-    const [editedUsers, dispatchEditedUsers] = useReducer(editedUsersReducer, fullUserInfo);
+    const [editedUser, dispatchEditedUser] = useReducer(userReducer, fullUserInfo);
 
-    const inputName = (e) => dispatchEditedUsers({type: 'INPUT_NAME', payload: e.target.value});
-    const inputUserName = (e) => dispatchEditedUsers({type: 'INPUT_USERNAME', payload: e.target.value});
-    const inputEmail = (e) => dispatchEditedUsers({type: 'INPUT_EMAIL', payload: e.target.value});
-    const inputPhone = (e) => dispatchEditedUsers({type: 'INPUT_PHONE', payload: e.target.value});
-    const inputWebsite = (e) => dispatchEditedUsers({type: 'INPUT_WEBSITE', payload: e.target.value});
+    const inputName = (e) => dispatchEditedUser({type: 'INPUT_NAME', payload: e.target.value});
+    const inputUsername = (e) => dispatchEditedUser({type: 'INPUT_USERNAME', payload: e.target.value});
+    const inputEmail = (e) => dispatchEditedUser({type: 'INPUT_EMAIL', payload: e.target.value});
+    const inputPhone = (e) => dispatchEditedUser({type: 'INPUT_PHONE', payload: e.target.value});
+    const inputWebsite = (e) => dispatchEditedUser({type: 'INPUT_WEBSITE', payload: e.target.value});
 
     return (
         <div>
@@ -23,7 +22,7 @@ export default function EditUserWindow(props) {
             </div>
             <div>
                 <label>UserName:</label>
-                <input onInput={inputUserName} type="text" defaultValue={username}/>
+                <input onInput={inputUsername} type="text" defaultValue={username}/>
             </div>
             <div>
                 <label>Email:</label>
@@ -38,8 +37,8 @@ export default function EditUserWindow(props) {
                 <input onInput={inputWebsite} type="text" defaultValue={website}/>
             </div>
             <div>
-                <button onClick={() => saveEditUser('save', editedUsers)}>Save</button>
-                <button onClick={saveEditUser}>Cancel</button>
+                <button onClick={() => saveEditedUser('save', editedUser)}>Save</button>
+                <button onClick={saveEditedUser}>Cancel</button>
             </div>
         </div>
     )
