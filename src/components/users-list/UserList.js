@@ -5,16 +5,15 @@ import { useReducer, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import actFetchApi from "../../service/fetch-api/ActFetchApi";
 import RenderUser from "../user/User";
-// import reducerApi from "../../reducers/ApiReducer";
-
+import { apiReducer, initialState } from "../../reducers/ApiReducer";
 
 function ActUserList(props) {
-    const [users, setUsers] = useState(null);
+    // const [users, setUsers] = useState(null);
+    const [users, dispatch] = useReducer(apiReducer, initialState);
 
-    // const [state, dispatch] = useReducer(reducerApi, initialState);
     useEffect(() => {
         const {match: {url}} = props;
-        actFetchApi(url).then(json => setUsers(json))
+        actFetchApi(url).then(json => dispatch({type: 'SET_USERS', payload: json}))
     }, [])
 
     if (users) {
