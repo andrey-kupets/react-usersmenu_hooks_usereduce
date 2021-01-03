@@ -1,9 +1,9 @@
 export default function RenderUser(props) {
-    const {user} = props;
+    const {user: {id, name}, user, details} = props;
     return (
         <div>
-            {user.id} - {user.name}
-            <button>details...</button>
+            {id} - {name}
+            <button onClick={() => details(user)}>details...</button>
         </div>
     )
 }
