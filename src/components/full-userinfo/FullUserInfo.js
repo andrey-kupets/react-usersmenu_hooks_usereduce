@@ -1,5 +1,5 @@
 export default function ProvideFullUserInfo(props) {
-    const {fullUserInfo} = props;
+    const {fullUserInfo, showEditUserWindow} = props;
     const {id, name, username, email, phone, website} = fullUserInfo;
     return (
         <div>
@@ -10,7 +10,7 @@ export default function ProvideFullUserInfo(props) {
             <div><span><u>Phone:</u></span> {phone}</div>
             <div><span><u>Website:</u></span> {website}</div>
             <div>
-                <button>Edit User</button>
+                <button onClick={showEditUserWindow}>Edit User</button>
                 <button>Delete User</button>
             </div>
         </div>
