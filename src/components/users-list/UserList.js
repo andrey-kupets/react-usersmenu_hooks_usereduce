@@ -28,7 +28,21 @@ function ActUserList(props) {
         dispatchEditDisplay({type: 'EDITION_MENU_IS_VISIBLE', payload: 'visible'});
     };
 
+    const saveEditUser = (btnName, editedUser) => {
+        if (btnName === 'save') {
+            const savedUsers = users.filter(user => user.id !== editedUser.id);
+            savedUsers.push(editedUser);
+            savedUsers.sort((a, b) => a.id - b .id);
+            dispatchUsers({type: 'SET_USERS', payload: savedUsers});
+            dispatchDetailInfo({type: 'SET_DETAIL_INFO', payload: editedUser});
+        } dispatchEditDisplay({type: 'EDITION_MENU_IS_VISIBLE', payload: ''});
+    }
 
+    const deleteUser = (id) => {
+        const newUsers = users.filter(user => user.id !== id);
+        dispatchUsers({type: 'SET_USERS', payload: newUsers});
+        dispatchDetailInfo({type: 'SET_DETAIL_INFO', payload: ''});
+    }
 
     if (users) {
         return (
@@ -38,8 +52,8 @@ function ActUserList(props) {
                     {!!users && users.map(user => <RenderUser user={user} key={user.id} details={clickForDetails}/>)}
                     <button>Create User</button>
                 </div>
-                {!!fullUserInfo && <ProvideFullUserInfo fullUserInfo={fullUserInfo} showEditUserWindow={showEditUserWindow}/>}
-                {!!editUserWindow && <EditUserWindow/>}
+                {!!fullUserInfo && <ProvideFullUserInfo fullUserInfo={fullUserInfo} showEditUserWindow={showEditUserWindow} deleteUser={deleteUser}/>}
+                {!!editUserWindow && <EditUserWindow fullUserInfo={fullUserInfo} saveEditUser={saveEditUser}/>}
                 <div>1</div>
             </div>
         );
